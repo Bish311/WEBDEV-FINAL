@@ -37,9 +37,7 @@ async function generatePlaylist() {
     btnText.style.visibility = "hidden";
     spinner.style.display = "block";
 
-    const dynamicUrl = getDynamicUrl();  // Call the function to get the dynamic URL
-
-    const response = await fetch(dynamicUrl, {
+    const response = await fetch("https://webdev-final-production-3aa7.up.railway.app//generate-playlist", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ genre, artist, mood }),
@@ -76,12 +74,4 @@ function showError(message) {
   container.insertBefore(errorEl, document.querySelector(".form-container"));
 
   setTimeout(() => errorEl.remove(), 5000);
-}
-
-// Dynamic URL generation function
-function getDynamicUrl() {
-  // Example: Change this logic as per your requirement
-  const isProduction = window.location.hostname !== 'localhost';  // Check if it's production or local
-  const baseUrl = isProduction ? 'https://your-production-url.com' : 'http://localhost:3000';
-  return `${baseUrl}/generate-playlist`;  // Return the full dynamic URL
 }
